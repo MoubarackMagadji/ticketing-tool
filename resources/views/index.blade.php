@@ -125,12 +125,19 @@
         <img id='loginlogo' src='images/logo.png'>	
 
         {{ Cookie::get('error')}}
+
+        @if (Cookie::get('lock'))
+            <p class="error">
+                <span>Your attempts are exceded.</span>
+                <span style='display: block'> You must wait for 3 mins</span>
+            </p>
+        @endif
     
         <form method='post' action=' {{ route('authenticate') }}'>
             @csrf
         
-            <label>Username </label><input type="text" name="username" placeholder=""   required><br/><br/>
-            <label>Password </label><input type="password" name="password" placeholder="" id='password'  required> 
+            <label>Username </label><input type="text" name="username" placeholder=""   {{ Cookie::get('lock') ? 'disabled':'' }} required><br/><br/>
+            <label>Password </label><input type="password" name="password" placeholder="" id='password' {{ Cookie::get('lock') ? 'disabled':'' }}  required> 
             
             {{-- <span id='hideshow'> <input type="checkbox" id="showPassword"> <label for='showPassword'>Show</label> </span> --}}
             

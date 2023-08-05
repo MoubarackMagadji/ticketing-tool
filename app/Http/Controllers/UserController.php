@@ -14,7 +14,7 @@ class UserController extends Controller
 
 
     public function dashboard(){
-        
+
     }
 
     public function authenticate(Request $request){
@@ -30,7 +30,21 @@ class UserController extends Controller
             request()->session()->regenerateToken();
             return redirect( route('dashboard'));
         }else{
-            Cookie::queue('error', '1', 3);
+            if(Cookie::get('error')){
+                $erroCookie = Cookie::get('error');
+                if($erroCookie == 2){
+                    Cookie::queue('error', 1,-1);
+                    Cookie::queue('lock', 1,3);
+                }else{
+                    Cookie::queue('error', ($erroCookie +1), 3);
+                }
+                
+                
+            }else{
+                Cookie::queue('error', 1, 3);
+            }
+
+            
 
             return redirect()->back()->with('error','Wrong credentials');
         }
