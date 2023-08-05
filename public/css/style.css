@@ -486,6 +486,7 @@ select:disabled{
 
 .checkbox input[type=checkbox]{
 	-webkit-appearance:none;
+	appearance:none;
 	height: 25px;
 	width: 47px !important;
 	position: relative;
