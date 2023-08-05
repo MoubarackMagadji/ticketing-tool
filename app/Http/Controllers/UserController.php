@@ -12,6 +12,11 @@ class UserController extends Controller
 
 
 
+
+    public function dashboard(){
+        
+    }
+
     public function authenticate(Request $request){
         // dd($request->all());
 

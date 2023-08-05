@@ -16,6 +16,8 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->middleware('guest');
 
-Route::post('/loginValidate', [UserController::class, 'authenticate'])->name('authenticate');
+Route::post('/loginValidate', [UserController::class, 'authenticate'])->name('authenticate')->middleware('guest');
+
+Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
