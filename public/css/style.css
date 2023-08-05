@@ -1,0 +1,567 @@
+/* general */
+@keyframes comeDown{
+	from{top:0; opacity: 0}
+	to{top:30px; opacity: 1;}
+}
+
+
+*{
+	box-sizing: border-box;
+	outline: 0;
+	scrollbar-width:none;
+}
+a{
+	color:inherit;
+	text-decoration: none;
+}
+i{
+	cursor: pointer;
+}
+
+/** {
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+*::-webkit-scrollbar {
+  width: 12px;
+}
+*::-webkit-scrollbar-track {
+  background: orange;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 3px solid orange;
+}*/
+#notifPanel{
+	position: fixed;
+	top:-56px;
+	opacity:0;
+	width:300px;
+	border-width: 0px 0px 0px 6px;
+	left:calc((50% + 70px) - 150px);
+	padding:7px;
+	z-index: 5000;
+}
+.normal{
+	background-color: white;
+	border:1px solid grey;
+}
+.error{
+	background-color: #ffdddd;
+	border:solid red;
+}
+.success{
+	background-color: #ddffdd;
+	border:solid #4CAF50;
+}
+.info{
+	background-color:  #e7f3fe;
+	border:solid #2196F3;
+}
+.warning{
+	background-color:  #ffffcc;
+	border:solid #ffeb3b;
+}
+#closeMes{
+	position: absolute;
+	width: 160px;
+	background-color: grey;
+	color: white;
+	padding: 1px;
+	text-align: center;
+	border-radius: 0px 0px 5px 5px;
+	left:calc(50% - 80px);
+	bottom:-21px;
+	height: 21px;
+
+}
+#notifClose{
+	position: absolute;
+	right: 10px;
+	cursor:pointer;
+	color:grey;
+	top:20%;
+}
+
+
+/* The switch - the box around the slider */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 26px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 19px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/*Code started */
+html{
+	height: 100%;
+}
+body{
+	margin:0;
+	background-color: #f5f5f5;
+	height: 100%;
+}
+#head{
+	position: fixed;
+	background-color: black;
+	width:100%;
+	height:56px;
+	padding:5px 20px;
+	color:white;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 20000;
+}
+#hIndex{
+	color:white;
+	text-decoration: none;
+	font-size: 34px;
+}
+#headProf{
+	position: relative;
+	background-color: grey;
+	display:flex;
+	align-items: center;
+	padding:0px 5px;
+	border-radius: 30px;
+	height: 33px;
+}
+#headProf:hover #editSpan{
+	
+	display:block;
+	
+}
+#editSpan{
+	display:none;
+	
+	bottom:-24px;
+	background-color: grey;
+	width:87px;
+	padding:3px 0px;
+	text-align: center;
+	left:px;
+}
+#editSpan a{
+	color:white;
+	text-decoration: none;
+}
+#editSpan a:hover{
+	text-decoration: underline;
+}
+#headPic{
+	width:30px;
+	height: 30px;
+}
+nav{
+	position: fixed;
+	top:56px;
+	width:160px;
+	background-color:#26a69a ;
+	height: 100%;
+	z-index: 10px;
+	overflow-y:hidden;
+	transition: .2s;
+}
+/*nav:hover{
+	width: 160px;
+	z-index: 500;
+}*/ 
+nav a{
+	color:white;
+	border-bottom:1px solid #ffffffc7;
+	display:block;
+	padding:15px 10px;
+	text-decoration: none;
+	cursor:pointer;
+	font-weight: bold;
+}
+nav a:hover{
+	background-color: #f5f5f5;
+	color:#323267;
+}
+#actif{
+	background-color: #f5f5f5;
+	color:#323267;
+}
+
+
+#configNav{
+	position: fixed;
+	top:56px;
+	width:140px;
+	left:160px;
+	background-color:white ;
+	z-index: 10px;
+	overflow-y:scroll;
+}
+#configNav a{
+
+	border-bottom:1px solid #ffffffc7;
+	display:block;
+	padding:15px 10px;
+	text-decoration: none;
+	cursor:pointer;
+	font-weight: bold;
+}
+
+section{
+	padding-top:56px;
+	margin-left:160px;
+	
+}
+#content{
+	padding:10px
+}
+#sugFormDiv{
+	width:400px;
+	height:360px;
+	background-color: white;
+	border:1px solid grey;
+	position: fixed;
+	top:calc(50% - 180px);
+	left:100%;
+	transition: .5s;
+}
+#sugFormDiv button{
+	padding:5px;
+	border-radius: 0;
+	background-color: black;
+	color:white;
+	border:0;
+	position: absolute;
+	transform: rotate(90deg);
+	left:-25.5%;
+	top:135px;
+	font-weight: bold;
+	cursor:pointer;
+	outline: 0;
+}
+#sugFormDiv h3{
+	border-bottom: 1px solid #00000026;
+	padding-bottom: 10px;
+	padding-left:15px;
+}
+#sugFormDiv h3 i{
+	color:#02ccba;
+	position: absolute;
+	right:18px;
+	cursor: pointer;
+}
+#sugFormDiv div{
+	width:90%;
+	margin:auto;
+}
+#sugFormDiv div label{
+	display:block;
+}
+#sugFormDiv div input, #sugFormDiv div textarea{
+	width:100%;
+	border:1px solid #02ccba;
+	padding:7px;
+	margin-bottom: 10px;
+}
+#sugFormDiv input[type=submit]{
+	border:0;
+	display:block;
+	padding:15px 50px;
+	margin-top: 15px;
+	margin-left: 5%;
+	background: linear-gradient(88deg, #02b3e4, #02ccba);
+	font-weight: bold;
+	color:white;
+}
+#sugFormDiv label{
+	color:#02ccba;
+}
+#cust{
+	margin:20px 0px 0px;
+}
+label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+}
+#sugForm select{
+	width:100%;
+}
+
+
+input[type=submit]{
+	cursor:pointer;
+}
+input[type=submit]:active{
+	transform: scale(0.90);
+}
+
+
+#loaderDiv{
+
+	position: fixed;
+	top: 0;
+	left:0;
+	width: 100%;
+	height:100%;
+	background-color: #0000;
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	display: none;
+}
+
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0px;
+    color: black;
+    display: inline-block;
+	background-color: #80808012;
+	display:inline-block;
+	margin:0px 0px;
+	padding: 5px 5px 7px;
+	width:200px;
+	border:1px solid black;
+	 background-image: url(../images/select.png);
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: right -3px top 2px;
+}
+select:disabled{
+	background-color: #8080804a;
+	background-image: url();
+	color:#00000082;
+}
+
+
+.selectD{
+	width: 250px;
+	margin:10px 0px;
+	cursor: pointer;
+	border:1px solid black;
+	position: relative;
+	display:inline-block;
+}
+.selectD > span{
+	display: inline-block;
+	background-color: #80808012;
+	display:inline-block;
+	width: 100%;
+	margin:0px 0px;
+	padding: 5px 5px 7px;	
+}
+.selectD > span:after{
+	content:"\f0d7";
+	position: absolute;
+	right: 5px;
+	font: normal normal normal 16px FontAwesome;
+    text-rendering: auto;
+}
+.selectD > div{
+	display:none;
+	width: 100%;
+	background-color: white;
+	border: 1px solid black;
+	position: absolute;
+	z-index:100;
+}
+.selectD > div input[type=text]{
+	margin:5px auto;
+	width: 90%;
+	display: block;
+	
+}
+.selectD > div > div{
+	max-height: 150px;
+	overflow-y: scroll;
+}
+.selectD > div > div span{
+	display: block;
+	width:100%;
+	padding:5px;
+}
+.selectD > div > div span:hover{
+	background-color: #4747d5 !important;
+	color: white !important;
+}
+
+.selectManualButton{
+	padding: 7px;
+	text-align: center;
+	display: block;
+	background: darkgray;
+}
+.selectManualButton:active{
+	transform:scale(1.01);
+}
+.selectManualButtonCancel{
+	padding: 7px;
+	text-align: center;
+	display: block;
+	background: gray;
+}
+.selectManualButtonCancel:active{
+	transform:scale(1.01);
+}
+.manualInputInput{
+	display: inline-block !important;
+	width: 60% !important;
+	margin-left: 18% !important;
+}
+.manualInputOk{
+	padding: 5px 15px;
+	background: darkgray;
+	position: relative;
+	top: 2px;
+	display: none;
+}
+
+.close{
+	background-color: black;
+	border-radius: 30px;
+	padding: 3px 5px 5px 5px;
+	font-size: 20px;
+	position: absolute;
+	right: 10px;
+	top: 30px;
+	cursor: pointer;
+}
+
+
+.checkbox input[type=checkbox]{
+	-webkit-appearance:none;
+	height: 25px;
+	width: 47px !important;
+	position: relative;
+	left:0;
+	border-radius:30px;
+	background-color: #f5f5f5;
+	border:2px solid #26a69a;
+	outline:0;
+	transition: .2s;
+	cursor:pointer;
+}
+.checkbox input[type=checkbox]:before{
+	position: absolute;
+	content: " ";
+	height: 17px;
+	width: 20px;
+	left:2px;
+	top: 2px;
+	border-radius: 30px;
+	background-color: #26a69a;
+	transition: .2s;
+}
+.checkbox input:checked[type=checkbox]{
+	background-color: #26a69a;
+}
+.checkbox input:checked[type=checkbox]:before{
+	left: 21px;
+	background-color: white;
+}
+.checkbox{
+	display:inline-flex;
+	align-items: center;
+
+
+}
+#filter_Down{
+	display:flex;
+	justify-content: space-between;
+	padding:10px 20px;
+	align-items: center;
+	margin:20px 0px;
+
+}
+#totalCount{
+	display:inline-block;
+	margin-left:20px;
+	font-size: 110%;
+	font-weight: bold;
+}
+
+#confirmationDiv{
+	display:none;
+	position:fixed;
+	top:200px; 
+	left:45%;
+	background-color: white;
+	z-index: 1000;
+	width: 200px;
+	height: 130px;
+	padding:20px;
+	text-align: center;
+	-webkit-box-shadow: 0px 7px 24px 4px rgba(0,0,0,0.61);
+	-moz-box-shadow: 0px 7px 24px 4px rgba(0,0,0,0.61);
+	box-shadow: 0px 7px 24px 4px rgba(0,0,0,0.61);
+
+}
+#yesBut{
+	font-weight: bold;
+	background-color: green;
+	color:white;
+	padding:3px 10px;
+	margin-right: 5px;
+}
+#noBut{
+	font-weight: bold;
+	background-color: red;
+	color:white;
+	padding:3px 10px;
+}

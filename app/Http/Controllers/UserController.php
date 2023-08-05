@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,15 @@ class UserController extends Controller
 
 
 
-    public function dashboard(){
+    public function logout(Request $request){
+        auth()->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect('/');
+    }
 
+    public function dashboard(){
+        return view('dashboard');
     }
 
     public function authenticate(Request $request){
@@ -57,7 +65,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('users.index', compact('users'));
     }
 
     /**

@@ -21,8 +21,12 @@ Route::get('/', function () {
 Route::post('/loginValidate', [UserController::class, 'authenticate'])->name('authenticate')->middleware('guest');
 
 Route::prefix('staffs')->middleware('auth')->group(function(){
+
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-    
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+
 });
 
