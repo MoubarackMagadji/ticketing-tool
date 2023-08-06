@@ -6,6 +6,9 @@
     <a href=' {{ route('user.create') }}'><button>Create a user</button></a>
     
     @forelse ($users as $user)
+
+        
+
         
         
         <div class='border-bottom py-3 row' >

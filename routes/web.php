@@ -31,6 +31,7 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
     
     Route::prefix('user')->group(function(){
         Route::get('/create', [UserController::class, 'create'])->name('user.create');
+        Route::post('/create', [UserController::class, 'store'])->name('user.store');
     });
 
     
