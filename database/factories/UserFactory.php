@@ -23,7 +23,8 @@ class UserFactory extends Factory
             'username' => 'BTC001',
             'staffID' => 'BTC001',
             'isadmin' => true,
-            'level' => 3
+            'level' => 3,
+            'dept_id' => 1
         ];
     }
 

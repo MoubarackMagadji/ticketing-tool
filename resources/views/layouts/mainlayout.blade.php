@@ -2,7 +2,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-	<!-- <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css"> -->
+	<link rel="stylesheet" href=" {{ asset('css/bootstrap-5.3.1.css')}}"> 
 	<meta charset='utf-8'>
 	<title>Staffs</title>
 <style>
@@ -38,6 +38,7 @@
 
             <a href='dashboard.php'><i class='fa fa-home'></i><span> Dashboard</span></a>
             <a href='{{ route('users')}}'><i class='fa fa-ticket'></i> Users</span></a>
+            <a href='{{ route('depts')}}'><i class='fa fa-ticket'></i> Dept</span></a>
 
             <form method="post" action='/staffs/logout'>
                 @csrf
@@ -49,12 +50,28 @@
 
 <section>
     <div id='content'>
+        
+        @if (session()->has('success'))
+            <p class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }} 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </p>
+        @endif
+
+        @if (session()->has('error'))
+            <p class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }} 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </p>
+        @endif
+
         @yield('content')
     </div>
 </section>
 	
 <?php /* include('footer.php'); */ ?>
 	<!-- <script src='../js/canvasjs.min.js'></script> -->
+    <script src=' {{ asset('js/bootstrap-5.3.1.js') }}'> </script>
 	<script>
 		
 	</script>
