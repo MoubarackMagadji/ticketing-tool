@@ -91,7 +91,6 @@ class PriorityController extends Controller
         $priority['status'] = $request->has('status') ? 1 : 0;
         $priority['name'] = $request['name'];
         $priority['sla'] = $request['sla'];
-
         
         $priority->save();
 
