@@ -152,6 +152,20 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'User details updated successfully');
     }
+    
+    public function updatepassword(Request $request, User $user){
+        // dd($request->all());
+
+        $userData = $request->validate([
+            'password'=> 'required|min:6|confirmed',
+        ]);
+
+        $user['password'] = bcrypt($userData['password']);
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'User password updated successfully');
+    }
 
     /**
      * Remove the specified resource from storage.

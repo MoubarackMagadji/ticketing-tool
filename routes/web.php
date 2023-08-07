@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
 
         Route::get('/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
         Route::post('/edit/{user}', [UserController::class, 'update'])->name('user.update');
+        Route::post('/editpassword/{user}', [UserController::class, 'updatepassword'])->name('user.updatepassword');
 
         Route::get('/{user}', [UserController::class, 'show'])->name('user.show');
     });
@@ -47,6 +49,15 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
         Route::post('/create', [DeptController::class, 'store'])->name('dept.store');
         Route::get('/edit/{dept}', [DeptController::class, 'edit'])->name('dept.edit');
         Route::put('/edit/{dept}', [DeptController::class, 'update'])->name('dept.update');
+    });
+
+    Route::prefix('status')->group(function(){
+
+        Route::get('/', [StatusController::class, 'index'])->name('status');
+        Route::get('/create', [StatusController::class, 'create'])->name('status.create');
+        Route::post('/create', [StatusController::class, 'store'])->name('status.store');
+        Route::get('/edit/{status}', [StatusController::class, 'edit'])->name('status.edit');
+        Route::post('/edit/{status}', [StatusController::class, 'update'])->name('status.update');
     });
 
 });

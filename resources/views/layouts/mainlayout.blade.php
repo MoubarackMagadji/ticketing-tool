@@ -38,11 +38,12 @@
 
             <a href='dashboard.php'><i class='fa fa-home'></i><span> Dashboard</span></a>
             <a href='{{ route('users')}}'><i class='fa fa-ticket'></i> Users</span></a>
-            <a href='{{ route('depts')}}'><i class='fa fa-ticket'></i> Dept</span></a>
+            <a href='{{ route('depts')}}'><i class='fa fa-ticket'></i> Depts</span></a>
+            <a href='{{ route('status')}}'><i class='fa fa-ticket'></i> Status</span></a>
 
             <form method="post" action='/staffs/logout'>
                 @csrf
-                <input type="submit" value='Logout'>
+                <input type="submit" class='btn btn-danger text-start w-100'  value='Logout'>
             </form>
             {{-- <a href='postfolder/logout.php'><i class='fa fa-sign-out'></i><span>  Log out</span></a> --}}
         </nav>

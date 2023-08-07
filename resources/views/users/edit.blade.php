@@ -114,23 +114,34 @@
     </form>
 
 
+    
+    
+    <form action="{{ route('user.updatepassword', $user->id)}}" method='post' class='w-50 mt-5'>
 
-    {{-- <div class='mb-3'>
+        <h3 class="h2">Password</h3>
+
+            @csrf
+
+        <div class='mb-3'>
             <label class='form-label' for="password">Password</label>
             <input class='form-control' type="password" name='password' id='password' >
 
             @error('password')
                 <span class='text-danger'>{{ $message }}</span>
             @endError
-    </div>
+        </div>
 
-    <div class='mb-3'>
-        <label class='form-label' for="password_confirmation">Password confirmation</label>
-        <input class='form-control' type="password" name='password_confirmation' id='password_confirmation' >
+        <div class='mb-3'>
+            <label class='form-label' for="password_confirmation">Password confirmation</label>
+            <input class='form-control' type="password" name='password_confirmation' id='password_confirmation' >
 
-        @error('password_confirmation')
-            <span class='text-danger'>{{ $message }}</span>
-        @endError
-    </div> --}}
+            @error('password_confirmation')
+                <span class='text-danger'>{{ $message }}</span>
+            @endError
+        </div>
+
+        <input type='submit' class='btn btn-primary btn-sm'>
+    </form>
+    
 
 @endsection
