@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\PriorityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,6 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
     });
 
     Route::prefix('status')->group(function(){
-
         Route::get('/', [StatusController::class, 'index'])->name('status');
         Route::get('/create', [StatusController::class, 'create'])->name('status.create');
         Route::post('/create', [StatusController::class, 'store'])->name('status.store');
@@ -60,5 +60,14 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
         Route::post('/edit/{status}', [StatusController::class, 'update'])->name('status.update');
     });
 
+    Route::get('/priorities', [PriorityController::class, 'index'])->name('priorities');
+
+    Route::prefix('priority')->group(function(){
+        Route::get('/create', [PriorityController::class, 'create'])->name('priority.create');
+        Route::post('/create', [PriorityController::class, 'store'])->name('priority.store');
+        Route::get('/edit/{priority}', [PriorityController::class, 'edit'])->name('priority.edit');
+        Route::post('/edit/{priority}', [PriorityController::class, 'update'])->name('priority.update');
+
+    });
 });
 

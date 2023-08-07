@@ -90,8 +90,7 @@ class StatusController extends Controller
         $status['status'] = $request->has('status') ? 1 : 0;
         $status['name'] = $statusData['name'];
 
-        // echo  $statusData['status']; 
-        // $status->update($statusData);
+        
         $status->save();
 
         return redirect()->back()->with('success', 'Status updated');

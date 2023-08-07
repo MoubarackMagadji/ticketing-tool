@@ -40,6 +40,7 @@
             <a href='{{ route('users')}}'><i class='fa fa-ticket'></i> Users</span></a>
             <a href='{{ route('depts')}}'><i class='fa fa-ticket'></i> Depts</span></a>
             <a href='{{ route('status')}}'><i class='fa fa-ticket'></i> Status</span></a>
+            <a href='{{ route('priorities')}}'><i class='fa fa-ticket'></i> Priorities</span></a>
 
             <form method="post" action='/staffs/logout'>
                 @csrf
