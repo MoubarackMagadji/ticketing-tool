@@ -16,7 +16,7 @@
     @endif --}}
 
     
-    <form action=" {{ route('user.store')}} " method='post' class='w-50 mt-5'>
+    <form action=" {{ route('user.update', $user->id)}} " method='post' class='w-50 mt-5'>
 
         @csrf
 
@@ -95,14 +95,14 @@
         </div>
 
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" name='status'  id="status" {{ $dept->d_active ? 'checked':'' }}>
+            <input class="form-check-input" type="checkbox" name='status'  id="status" {{ $user->status ? 'checked':'' }}>
             <label class="form-check-label" for="status">
                 Active
             </label>
         </div>
 
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" name='isadmin'  id="isadmin" {{ $dept->d_active ? 'checked':'' }}>
+            <input class="form-check-input" type="checkbox" name='isadmin'  id="isadmin" {{ $user->isadmin ? 'checked':'' }}>
             <label class="form-check-label" for="isadmin">
                 Is Admin
             </label>

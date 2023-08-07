@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -137,9 +138,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+
+        
+        $userData = $request->all();
+
+        $userData['isadmin'] = $request->has('isadmin') ? 1 : 0;
+        
+
+        $user['status'] = $userData['status'] = $request->has('status') ? 1 : 0;
+        $user->update($userData);
+
+        return redirect()->back()->with('success', 'User details updated successfully');
     }
 
     /**
