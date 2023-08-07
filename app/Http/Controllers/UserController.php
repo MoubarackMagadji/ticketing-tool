@@ -95,7 +95,7 @@ class UserController extends Controller
         $user = $request->all();
 
         $user['password'] = bcrypt($user['password']);
-        $user['isadmin'] = 1;
+        $user['isadmin'] = 0;
 
         User::create($user);
 
@@ -108,9 +108,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -119,9 +119,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $depts = Dept::all()->where('d_active',1);
+
+        return view('users.edit', 
+            [ 
+                'user' => $user,
+                'depts' => $depts
+            ]);
     }
 
     /**

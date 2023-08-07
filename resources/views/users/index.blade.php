@@ -12,10 +12,13 @@
         
         
         <div class='border-bottom py-3 row' >
+            <span class='col'> {{ $user->staffID }}</span>
             <span class='col'>{{ $user->name }} </span>
 
             <span class='col'> {{ $user->email }}</span>
-            {{-- <a href= {{ route('dept.edit', $dept->id ) }} ><button>Edit</button></a> --}}
+            <span class='col'> {{ $user->status ? 'Active' : 'Inactive' }}</span>
+            {{-- <span class='col'> {{ $user->username }}</span> --}}
+            <a class='col' href= {{ route('user.show', $user->id ) }} ><button>View</button></a>
         </div>
     @empty
         {{ 'No users for now' }}
