@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dept;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -78,10 +79,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $depts = Dept::all()->where('d_active',1);
+        return view('users.create', compact('depts'));
     }
 
-    /**
+    /** 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -89,7 +91,15 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        dd($request->all());
+
+        $user = $request->all();
+
+        $user['password'] = bcrypt($user['password']);
+        $user['isadmin'] = 1;
+
+        User::create($user);
+
+        return redirect()->back()->with('success','User created successfully');
     }
 
     /**

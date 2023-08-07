@@ -29,8 +29,9 @@ class CreateUserRequest extends FormRequest
             'username' => ['required', Rule::unique('users', 'username')],
             'email' => ['required', 'email', Rule::unique('users','email')],
             'staffID' => ['required', Rule::unique('users', 'staffID') ],
-            'dept_id' => ['required', Rule::exists('dept', 'id')],
+            'dept_id' => ['required', Rule::exists('depts', 'id')],
             'level' => 'required|integer|min:1|max:3',
+            'password' => 'required|min:6|confirmed'
         ];
     }
 }
