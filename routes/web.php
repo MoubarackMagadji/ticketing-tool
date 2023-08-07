@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PriorityController;
+use App\Http\Controllers\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,13 +63,29 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
     });
 
     Route::get('/priorities', [PriorityController::class, 'index'])->name('priorities');
-
     Route::prefix('priority')->group(function(){
         Route::get('/create', [PriorityController::class, 'create'])->name('priority.create');
         Route::post('/create', [PriorityController::class, 'store'])->name('priority.store');
         Route::get('/edit/{priority}', [PriorityController::class, 'edit'])->name('priority.edit');
         Route::post('/edit/{priority}', [PriorityController::class, 'update'])->name('priority.update');
+    });
 
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+
+    Route::prefix('category')->group(function(){
+        Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('/create', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('/edit/{category}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('/edit/{category}', [CategoryController::class, 'update'])->name('category.update');
+    });
+
+    Route::get('/subcategories', [SubcategoryController::class, 'index'])->name('subcategories');
+
+    Route::prefix('subcategory')->group(function(){
+        Route::get('/create', [SubcategoryController::class, 'create'])->name('subcategory.create');
+        Route::post('/create', [SubcategoryController::class, 'store'])->name('subcategory.store');
+        Route::get('/edit/{subcategory}', [SubcategoryController::class, 'edit'])->name('subcategory.edit');
+        Route::post('/edit/{subcategory}', [SubcategoryController::class, 'update'])->name('subcategory.update');
     });
 });
 

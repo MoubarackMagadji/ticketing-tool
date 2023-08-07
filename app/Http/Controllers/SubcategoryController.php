@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SubcategoryController extends Controller
 {
@@ -14,7 +16,9 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        //
+        $subcategories = Subcategory::all();
+
+        return view('subcategories.index', compact('subcategories'));
     }
 
     /**
@@ -24,7 +28,9 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all()->where('status',1);
+        
+        return view('subcategories.create', compact('categories'));
     }
 
     /**
@@ -35,7 +41,16 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $data = $request->validate([
+            'name' => ['required', 'min:3', Rule::unique('subcategories', 'name')],
+            'category_id' => ['required', 'integer', Rule::exists('categories','id')]
+        ]);
+
+        Subcategory::create($data);
+
+        return redirect()->back()->with('success', 'Subcategory has been created');
+
     }
 
     /**
@@ -57,7 +72,8 @@ class SubcategoryController extends Controller
      */
     public function edit(Subcategory $subcategory)
     {
-        //
+        $categories = Category::all()->where('status',1);
+        return view('subcategories.edit', compact('subcategory', 'categories'));
     }
 
     /**
@@ -69,7 +85,19 @@ class SubcategoryController extends Controller
      */
     public function update(Request $request, Subcategory $subcategory)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required','min:3', Rule::unique('subcategories', 'name')->ignore($subcategory)],
+            'category_id' => ['required', Rule::exists('categories', 'id')]
+        ]);
+
+        $subcategory['status'] = $request->has('status') ? 1 : 0;
+        $subcategory['name'] = $request['name'];
+        $subcategory['category_id'] = $request['category_id'];
+        
+        
+        $subcategory->save();
+
+        return redirect()->back()->with('success', 'Category updated');
     }
 
     /**
