@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Dept extends Model
 {
@@ -15,5 +16,9 @@ class Dept extends Model
 
     public function getStatusAttribute(){
         return $this->d_active ? 'active':'Inactive';
+    }
+
+    public function categories(){
+        return $this->belongsToMany(Category::class);
     }
 }

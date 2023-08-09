@@ -20,12 +20,24 @@
             @endError
         </div>
 
+        {{-- {{ dd($category->depts->pluck('id')->toArray()) }} --}}
+
+        <div class='mb-3'>
+            <select class='form-select' name="depts[]" multiple='true'>
+                @foreach ($depts as $dept)
+                    <option value="{{ $dept->id }}"  {{ $category->hasDept($dept->id)  ? 'selected':'' }}> {{ $dept->d_name }} </option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="form-check">
             <input class="form-check-input" type="checkbox" name='status'  id="status" {{ $category->status ? 'checked':'' }}>
             <label class="form-check-label" for="status">
                 Active 
             </label>
         </div>
+
+
 
         <input type="submit" class='btn btn-primary btn-sm'>
     </form>

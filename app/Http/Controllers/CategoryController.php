@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dept;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -27,7 +28,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        
+        $depts = Dept::all()->where('d_active',1);
+        return view('categories.create', compact('depts'));
     }
 
     /**
@@ -38,14 +41,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
         $categoryData = $request->validate([
-            'name' => ['required','min:3', Rule::unique('categories', 'name')],
-            
+            'name' => ['required','min:3', Rule::unique('categories', 'name')],  
         ]);
 
         
 
-        Category::create($categoryData);
+        $category = Category::create($categoryData);
+
+        if($request->depts){
+            $category->depts()->Attach($request->depts);
+        }
 
         return redirect()->back()->with('success', 'Category has been created');
     }
@@ -69,7 +77,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        $depts = Dept::all()->where('d_active',1);
+        return view('categories.edit', compact('category','depts'));
     }
 
     /**
@@ -91,6 +100,8 @@ class CategoryController extends Controller
         
         
         $category->save();
+
+        $category->depts()->sync($request->depts);
 
         return redirect()->back()->with('success', 'Category updated');
     }

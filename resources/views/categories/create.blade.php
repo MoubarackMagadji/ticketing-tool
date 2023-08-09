@@ -18,6 +18,15 @@
             @endError
         </div>
 
+       
+        <div class='mb-3'>
+            <select class='form-select' name="depts[]" multiple='true'>
+                @foreach ($depts as $dept)
+                    <option value="{{ $dept->id}}" > {{ $dept->d_name }} </option>
+                @endforeach
+            </select>
+        </div>
+
         
 
         <input type="submit" class='btn btn-primary btn-sm'>
