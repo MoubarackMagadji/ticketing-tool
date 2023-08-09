@@ -12,7 +12,6 @@
             <span>{{ $category->name }} </span>
 
             <span>
-                {{-- {{ $category->depts->count() }}  --}}
                 @foreach ($category->depts as $dept)
                     <span class='badge bg-secondary'>{{ $dept->d_name  }}</span>
                 @endforeach
