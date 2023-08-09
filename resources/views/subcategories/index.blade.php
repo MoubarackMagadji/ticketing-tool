@@ -10,7 +10,7 @@
         
         <div class='border-bottom py-3' >
             <span>{{ $subcategory->name }} </span>
-
+            <span> {{ $subcategory->category->name }}</span>
             <span> {{ $subcategory->status_word }}</span>
 
             <a href= {{ route('subcategory.edit', $subcategory->id ) }} ><button>Edit</button></a>
