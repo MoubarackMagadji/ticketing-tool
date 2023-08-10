@@ -21,4 +21,12 @@ class Dept extends Model
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
+
+    public function otickets(){
+        return $this->hasMany(Tickets::class, 'rdept_id', 'id');
+    }
+
+    public function intickets(){
+        return $this->belongsTo(Tickets::class, 'dept_id', 'id');
+    }
 }

@@ -3,8 +3,9 @@
 <head>
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<link rel="stylesheet" href=" {{ asset('css/bootstrap-5.3.1.css')}}"> 
+    @yield('css')
 	<meta charset='utf-8'>
-	<title>Staffs</title>
+	<title>Ticketing | @yield('title')</title>
 <style>
 	
 </style>
@@ -37,6 +38,7 @@
             
 
             <a href='dashboard.php'><i class='fa fa-home'></i><span> Dashboard</span></a>
+            <a href='{{ route('tickets')}}'><i class='fa fa-ticket'></i> Tickets</span></a>
             <a href='{{ route('users')}}'><i class='fa fa-ticket'></i> Users</span></a>
             <a href='{{ route('depts')}}'><i class='fa fa-ticket'></i> Depts</span></a>
             <a href='{{ route('status')}}'><i class='fa fa-ticket'></i> Status</span></a>
@@ -74,8 +76,10 @@
 </section>
 	
 <?php /* include('footer.php'); */ ?>
-	<!-- <script src='../js/canvasjs.min.js'></script> -->
+	<script src='{{ asset('js/jq.js') }}'></script>
     <script src=' {{ asset('js/bootstrap-5.3.1.js') }}'> </script>
+    @yield('js')
+    @yield('script')
 	<script>
 		
 	</script>

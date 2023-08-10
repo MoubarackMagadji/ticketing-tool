@@ -30,7 +30,7 @@
             </select>
             
 
-            @error('dept_id')
+            @error('category_id')
                 <span class='text-danger'>{{ $message }}</span>
             @endError
 

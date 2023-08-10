@@ -19,14 +19,14 @@ class CreateTicketsTable extends Migration
             $table->bigInteger('rdept_id')->foreign('rdept_id')->references('id')->on('depts');
             $table->bigInteger('ruser_id')->foreign('ruser_id')->references('id')->on('users');
             $table->boolean('depticket')->default(false);
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->bigInteger('category_id')->foreign('category_id')->references('id')->on('categories');
             $table->bigInteger('subcategory_id')->foreign('subcategory_id')->references('id')->on('subcategories');
             $table->bigInteger('dept_id')->foreign('dept_id')->references('id')->on('depts');
             $table->bigInteger('status_id')->foreign('status_id')->references('id')->on('statuses');
             $table->bigInteger('priority_id')->foreign('priority_id')->references('id')->on('priorities');
             $table->bigInteger('user_id')->foreign('user_id')->references('id')->on('users');
-            $table->longText('attachedFiles');
+            $table->longText('attachedFiles')->nullable();
             $table->timestamps();
         });
     }

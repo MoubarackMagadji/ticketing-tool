@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\SubcategoryController;
@@ -86,6 +88,16 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
         Route::post('/create', [SubcategoryController::class, 'store'])->name('subcategory.store');
         Route::get('/edit/{subcategory}', [SubcategoryController::class, 'edit'])->name('subcategory.edit');
         Route::post('/edit/{subcategory}', [SubcategoryController::class, 'update'])->name('subcategory.update');
+    });
+
+    Route::get('/tickets', [TicketController::class,'index'])->name('tickets');
+
+    Route::prefix('ticket')->group(function(){
+        Route::get('/show/{ticket}', [TicketController::class, 'show'])->name('ticket.show');
+        Route::get('/create', [TicketController::class, 'create'])->name('ticket.create');
+        Route::post('/create', [TicketController::class, 'store'])->name('ticket.store');
+        Route::get('/edit/{ticket}', [TicketController::class, 'edit'])->name('ticket.edit');
+        Route::post('/edit/{ticket}', [TicketController::class, 'update'])->name('ticket.update');
     });
 });
 

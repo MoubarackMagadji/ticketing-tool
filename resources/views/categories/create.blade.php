@@ -1,5 +1,8 @@
 @extends('layouts.mainlayout')
 
+@section('css')
+    <link rel="stylesheet" href=" {{ asset('css/select2.min.css')}}"> 
+@endsection
 
 @section('content')
 
@@ -20,7 +23,7 @@
 
        
         <div class='mb-3'>
-            <select class='form-select' name="depts[]" multiple='true'>
+            <select class='form-select' name="depts[]" id ='depts' multiple='true'>
                 @foreach ($depts as $dept)
                     <option value="{{ $dept->id}}" > {{ $dept->d_name }} </option>
                 @endforeach
@@ -32,4 +35,26 @@
         <input type="submit" class='btn btn-primary btn-sm'>
     </form>
 
+@endsection
+
+@section('js')
+    <script src=" {{ asset('js/select2.min.js')}}"> </script>
+@endsection
+
+@section('script')
+    <script>
+        
+        $(document).ready(()=>{
+            
+            $("#depts").select2({
+                tags: true,
+                placeholder: "Select a category",
+            });
+
+        })
+
+        
+
+        $("#depts").hide()
+    </script>
 @endsection

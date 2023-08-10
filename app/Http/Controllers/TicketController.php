@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dept;
+use App\Models\User;
+use App\Models\Status;
 use App\Models\Ticket;
+use App\Models\Category;
+use App\Models\Priority;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateTicketRequest;
 
 class TicketController extends Controller
 {
@@ -14,7 +21,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::all();
+        return view ('tickets.index', compact('tickets'));
     }
 
     /**
@@ -24,7 +32,16 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        
+        $depts = Dept::all()->where('d_active',1);
+        $categories = Category::all()->where('status',1);
+        $subcategories = Subcategory::all()->where('status',1);
+        $users = User::all()->where('status',1);
+        $priorities = Priority::all()->where('status',1);
+        $statuss = Status::all()->where('status',1);
+
+        
+        return view('tickets.create', compact('categories', 'subcategories', 'depts', 'users', 'priorities', 'statuss'));
     }
 
     /**
@@ -33,9 +50,25 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTicketRequest $request)
     {
-        //
+        
+        $ticketDetails = [
+            'title' => $request->title,
+            'rdept_id' => $request->requester_dept_id,
+            'ruser_id' => $request->requester_user_id,
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'description' => $request->description,
+            'status_id' => $request->status_id ?? 1,
+            'priority_id' => $request->priority_id ?? 1,
+            'dept_id' => auth()->user()->dept_id,
+            'user_id' => auth()->user()->id,
+        ];
+
+        Ticket::create($ticketDetails);
+        
+        return redirect()->back()->with('success','Ticket created successfully');
     }
 
     /**
@@ -46,7 +79,8 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        // dd($ticket->toArray());
+        return view('tickets.show',compact('ticket'));
     }
 
     /**
