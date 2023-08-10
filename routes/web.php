@@ -100,7 +100,8 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
         // Route::get('/edit/{ticket}', [TicketController::class, 'edit'])->name('ticket.edit');
         // Route::post('/edit/{ticket}', [TicketController::class, 'update'])->name('ticket.update');
 
-        Route::get('/changecategories/{ticket}',[TicketController::class, 'changecategories'])->name('changecategories');
+        Route::get('/changecategories/{ticket}',[TicketController::class, 'changecategories'])->name('ticket.changecategories');
+        Route::post('/changecategories/{ticket}',[TicketController::class, 'changecategoriespost'])->name('ticket.changecategoriespost');
     });
 });
 

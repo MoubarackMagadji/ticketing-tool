@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Priority;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Requests\CreateTicketRequest;
 
 class TicketController extends Controller
@@ -111,9 +112,30 @@ class TicketController extends Controller
     }
 
     public function changecategories(Ticket $ticket){
-        dd($ticket);
+        // dd($ticket);
+
+        $categories = Category::all()->where('status',1);
+        $subcategories = Subcategory::all()->where('status',1);
+
+        return view('tickets.changecategories', compact('categories','subcategories', 'ticket'));
     }
 
+    public function changecategoriespost(Request $request,Ticket $ticket){
+        // dd($ticket);
+
+        $data = $request->validate([
+            'category_id' => ['required', 'integer', Rule::exists('categories', 'id')],
+            'subcategory_id' => ['required', 'integer', Rule::exists('subcategories', 'id')],
+        ]);
+
+        $ticket['category_id'] = $request->category_id;
+        $ticket['subcategory_id'] = $request->subcategory_id;
+
+        $ticket->save();
+
+        return redirect()->route('ticket.show', $ticket->id )->with('success','Categories successfully changed');
+
+    }
     /**
      * Remove the specified resource from storage.
      *

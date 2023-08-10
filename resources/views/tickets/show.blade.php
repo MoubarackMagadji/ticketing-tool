@@ -84,7 +84,7 @@
 
             <div>
                 <span class='d-block '>Category 
-                    <a href=' {{ route('changecategories', ['ticket'=>$ticket->id]) }}'>
+                    <a href=' {{ route('ticket.changecategories', ['ticket'=>$ticket->id]) }}'>
                     <button>Change</button></a> </span>
                 <span class='d-block fw-bold'>{{ $ticket->category->name }}</span>
             </div>
