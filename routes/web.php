@@ -96,8 +96,11 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
         Route::get('/show/{ticket}', [TicketController::class, 'show'])->name('ticket.show');
         Route::get('/create', [TicketController::class, 'create'])->name('ticket.create');
         Route::post('/create', [TicketController::class, 'store'])->name('ticket.store');
-        Route::get('/edit/{ticket}', [TicketController::class, 'edit'])->name('ticket.edit');
-        Route::post('/edit/{ticket}', [TicketController::class, 'update'])->name('ticket.update');
+        
+        // Route::get('/edit/{ticket}', [TicketController::class, 'edit'])->name('ticket.edit');
+        // Route::post('/edit/{ticket}', [TicketController::class, 'update'])->name('ticket.update');
+
+        Route::get('/changecategories/{ticket}',[TicketController::class, 'changecategories'])->name('changecategories');
     });
 });
 

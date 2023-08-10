@@ -79,8 +79,12 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        // dd($ticket->toArray());
-        return view('tickets.show',compact('ticket'));
+        $categories = Category::all()->where('status',1);
+        $subcategories = Subcategory::all()->where('status',1);
+        $priorities = Priority::all()->where('status',1);
+        $statuss = Status::all()->where('status',1);
+
+        return view('tickets.show',compact('ticket', 'categories', 'subcategories', 'priorities', 'statuss'));
     }
 
     /**
@@ -104,6 +108,10 @@ class TicketController extends Controller
     public function update(Request $request, Ticket $ticket)
     {
         //
+    }
+
+    public function changecategories(Ticket $ticket){
+        dd($ticket);
     }
 
     /**

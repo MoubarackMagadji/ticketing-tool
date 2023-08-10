@@ -4,6 +4,7 @@
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<link rel="stylesheet" href=" {{ asset('css/bootstrap-5.3.1.css')}}"> 
     @yield('css')
+    @yield('csscode')
 	<meta charset='utf-8'>
 	<title>Ticketing | @yield('title')</title>
 <style>
