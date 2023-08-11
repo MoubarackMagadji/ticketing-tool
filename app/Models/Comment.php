@@ -26,7 +26,8 @@ class Comment extends Model
 
     public function getFilesListAttribute(){
         $filesList = explode('#',trim($this->filesattached));
-        // $u = count($s)-1;
-        return $this->filesList;
+        array_pop($filesList);
+        $filesList = collect($filesList);
+        return $filesList;
     }
 }

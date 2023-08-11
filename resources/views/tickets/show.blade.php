@@ -73,6 +73,11 @@
             </div>
 
             <div>
+                <span class='d-block '>Employee currently on the ticket</span>
+                <span class='d-block fw-bold'>No employee yet</span>
+            </div>
+
+            <div>
                 <span class='d-block '>Last Updated at:</span>
                 <span class='d-block fw-bold'>{{ $ticket->updated_at->format('d M y, h:i') }}</span>
             </div>
@@ -106,11 +111,14 @@
 
             <div>
                 <span class='d-block '>Description</span>
-                <span class='d-block fw-bold'>{!! $ticket->description !!}</span>
+                <span class='d-block border border-dark p-2'>{!! $ticket->description !!}</span>
             </div>
 
-            <div>
-                0 files attached
+            <div class='mt-3'>
+                {{-- @if ( $ticket->hasFile ) --}}
+                {{ $ticket->filesList->count() }} {{ Str::plural('file', $ticket->filesList->count()) }} attached
+                {{-- @endif --}}
+                
             </div>
 
             {{-- <div class='mb-3'>
@@ -144,7 +152,7 @@
             
             <div class='border border-secondary flex-fill'>
                 {{-- {{ $ticket->comments }} --}}
-                @forelse ($ticket->comments as $comment)
+                @forelse ($ticket->comments->sortDesc() as $comment)
                     <div class='bg-white p-2 mb-2'>
                         <div class='d-flex justify-content-between fw-bold' style="border-bottom:1px dashed black">
                             <span>{{ $comment->user->name }}</span>
@@ -153,9 +161,21 @@
                         <div>
                             {{ $comment->commemttext }}  
                         </div>
-                        <div>
-                            {{ $comment->hasFile }}
-                        </div>
+
+                        @if ($comment->hasFile)
+                            <div>
+                                @foreach ($comment->filesList as $file)
+                                    <a 
+                                        class='badge bg-secondary text-decoration-none py1 px-2'
+                                        href='{{ asset("storage/filesAttached/".$file) }}' 
+                                        download='{{ $file }}' >
+                                        <span>{{ $file }} </span>
+                                    </a> 
+                                           
+                                @endforeach
+                                
+                            </div>
+                            @endif
                     </div>
                 @empty
                     No comment for this ticket

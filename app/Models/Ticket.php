@@ -17,6 +17,17 @@ class Ticket extends Model
     //    return $this->
     // }
 
+    public function getHasFileAttribute(){
+        return trim($this->attachedFiles) != '';
+    }
+
+    public function getFilesListAttribute(){
+        $filesList = explode('#',trim($this->attachedFiles));
+        array_pop($filesList);
+        $filesList = collect($filesList);
+        return $filesList;
+    }
+
     public function rdept(){
         return $this->belongsTo(Dept::class, 'rdept_id');
     }
@@ -44,6 +55,8 @@ class Ticket extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+
+
 
 
 
