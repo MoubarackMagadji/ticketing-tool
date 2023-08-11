@@ -14,7 +14,7 @@
 
     <a href=' {{ route('tickets') }}'><button class='btn btn-light btn-sm px-4'>Back</button></a>
     
-    <form action=" {{ route('ticket.store')}} " method='post' class='w-50 mt-5'>
+    <form action=" {{ route('ticket.store')}} " method='post' class='w-50 mt-5' enctype="multipart/form-data">
 
         @csrf
 
@@ -167,7 +167,7 @@
 
         <div class='mb-3'>
             <label class='form-label' for="attachement">Attachement</label>
-            <input class='form-control' type='file' name="attachement" id="attachement" >
+            <input class='form-control' type='file' name="attachement[]" multiple id="attachement" >
 
             @error('attachement')
                 <span class='text-danger'>{{ $message }}</span>

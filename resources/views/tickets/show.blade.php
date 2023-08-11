@@ -12,49 +12,59 @@
     
     <h1 class="display-6"> Ticket No: {{ $ticket->id }} - <span>{{ $ticket->title }} </span> </h1>
 
-    <div class='row'>
+    <div class='ms-2 row gap-2'>
 
-        <div class='col-4'>
+        <div class='col-4  p-2 border border-secondary' >
            
-            <div class='row'>
-                <div class='col mb-3'>
-                    <label class='form-label' for="">Priority </label>
-        
-                    <select class='form-select' name='priority_id' >
-                        <option value=''>Choose a priority</option>
-        
-                        @foreach ($priorities as $priority)
-                            <option value="{{ $priority->id }}"
-                                {{ $priority->id == $ticket->priority_id ? 'selected' : '' }}> 
-                                {{ $priority->name }}
-                            </option>
-                        @endforeach
-        
+            <div >
+                <form method='post' action=" {{ route('ticket.changestatuspriority', ['ticket'=>$ticket->id])}}" 
+                    class='row'>
+
+                    @csrf
+
+                    <div class='col mb-3'>
+                        {{-- <label class='form-label' for="">Priority </label> --}}
+            
+                        <select class='form-select' name='priority_id' >
+                            <option value=''>Choose a priority</option>
+            
+                            @foreach ($priorities as $priority)
+                                <option value="{{ $priority->id }}"
+                                    {{ $priority->id == $ticket->priority_id ? 'selected' : '' }}> 
+                                    {{ $priority->name }}
+                                </option>
+                            @endforeach
+            
+                            
+                        </select>
+
+                    </div>
+
+                    <div class='col mb-3'>
+                        {{-- <label class='form-label' for="">Status </label> --}}
+            
+                        <select class='form-select' name='status_id' >
+                            <option value=''>Choose a status</option>
+            
+                            @foreach ($statuss as $status)
+                                <option value="{{ $status->id }}"
+                                    {{ $status->id == $ticket->status_id ? 'selected' : '' }}> 
+                                    {{ $status->name }}
+                                </option>
+                            @endforeach
+                        </select>
                         
-                    </select>
-
-                </div>
-
-                <div class='col mb-3'>
-                    <label class='form-label' for="">Status </label>
-        
-                    <select class='form-select' name='status_id' >
-                        <option value=''>Choose a status</option>
-        
-                        @foreach ($statuss as $status)
-                            <option value="{{ $status->id }}"
-                                {{ $status->id == $ticket->status_id ? 'selected' : '' }}> 
-                                {{ $status->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    
-        
-                    @error('status_id')
-                        <span class='text-danger'>{{ $message }}</span>
-                    @endError
-        
-                </div>
+            
+                        @error('status_id')
+                            <span class='text-danger'>{{ $message }}</span>
+                        @endError
+            
+                    </div>
+                    <div class='col-1 justify-self-bottom'>
+                        <button class='btn btn-secondary'>OK</button>
+                    </div>
+                </form>
+                
             </div>
 
             <div>
@@ -96,7 +106,7 @@
 
             <div>
                 <span class='d-block '>Description</span>
-                <span class='d-block fw-bold'>{{ $ticket->description }}</span>
+                <span class='d-block fw-bold'>{!! $ticket->description !!}</span>
             </div>
 
             <div>
@@ -128,8 +138,22 @@
 
         </div>
 
-        <div class='col-8'>
-            Comments
+        <div class='col-7 '>
+            
+            <h5 class='m-0 p-0'>Comments</h5>
+            <div class='border border-secondary p-3'>
+
+            </div>
+
+            <form class='mt-2' action='' method='post' enctype="multipart/form-data">
+                <textarea class="form-control rounded-0" placeholder='Add a comment'></textarea>
+                <div class='d-flex justify-content-between mt-1'>
+                    <input class='d-none' type='file' id='filesAttached' name='filesAttached'>
+                    <label for='filesAttached'><span>Select files</span></label>
+
+                    <button class='btn btn-sm btn-primary'>Send</button>
+                </div>
+            </form>
         </div>
 
     </div>

@@ -13,6 +13,10 @@ class Ticket extends Model
 
     protected $data = ['create_at', 'updated_at'];
 
+    // public function getFileCountAttribute(){
+    //    return $this->
+    // }
+
     public function rdept(){
         return $this->belongsTo(Dept::class, 'rdept_id');
     }
@@ -32,7 +36,7 @@ class Ticket extends Model
     public function ruser(){
         return $this->belongsTo(User::class, 'ruser_id');
     }
-    
+
     public function luser(){
         return $this->belongsTo(User::class, 'user_id');
     }

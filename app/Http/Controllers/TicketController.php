@@ -11,6 +11,7 @@ use App\Models\Priority;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateTicketRequest;
 
 class TicketController extends Controller
@@ -53,7 +54,20 @@ class TicketController extends Controller
      */
     public function store(CreateTicketRequest $request)
     {
+        // dd($request->all());
+
+        // dd($request->has('attachement'));
+        $fileString = '';
+        if($request->has('attachement')){
+            // dd( $request->attachement);
+            foreach($request->file('attachement') as $file){
+                $fileName = uniqid().'_'.$file->getClientOriginalName();
+                Storage::putFileAs('public/attachements/', $file, $fileName);
+                $fileString = $fileString.$fileName.'#';
+            }
+        }
         
+
         $ticketDetails = [
             'title' => $request->title,
             'rdept_id' => $request->requester_dept_id,
@@ -65,6 +79,7 @@ class TicketController extends Controller
             'priority_id' => $request->priority_id ?? 1,
             'dept_id' => auth()->user()->dept_id,
             'user_id' => auth()->user()->id,
+            'attachedFiles' => $fileString
         ];
 
         Ticket::create($ticketDetails);
@@ -134,6 +149,23 @@ class TicketController extends Controller
         $ticket->save();
 
         return redirect()->route('ticket.show', $ticket->id )->with('success','Categories successfully changed');
+
+    }
+
+    public function changestatuspriority(Request $request, Ticket $ticket){
+        // dd($request);
+
+        $data = $request->validate([
+            'priority_id' => ['nullable', 'integer', Rule::exists('priorities', 'id')],
+            'status_id' => ['nullable', 'integer', Rule::exists('statuses', 'id')],
+        ]);
+
+        $ticket['priority_id'] = $request->priority_id;
+        $ticket['status_id'] = $request->status_id;
+
+        $ticket->save();
+
+        return redirect()->route('ticket.show', $ticket->id )->with('success','Changed successfully made');
 
     }
     /**

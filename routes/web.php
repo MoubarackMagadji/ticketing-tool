@@ -102,6 +102,7 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
 
         Route::get('/changecategories/{ticket}',[TicketController::class, 'changecategories'])->name('ticket.changecategories');
         Route::post('/changecategories/{ticket}',[TicketController::class, 'changecategoriespost'])->name('ticket.changecategoriespost');
+        Route::post('/changestatuspriority/{ticket}',[TicketController::class, 'changestatuspriority'])->name('ticket.changestatuspriority');
     });
 });
 
