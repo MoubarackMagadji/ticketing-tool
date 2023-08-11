@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CommentController extends Controller
 {
@@ -33,9 +35,31 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Ticket $ticket)
     {
-        //
+        
+        $fileString = '';
+        if($request->has('filesattached')){
+            foreach($request->file('filesattached') as $file){
+                $fileName = uniqid().'_'.$file->getClientOriginalName();
+                
+                Storage::putFileAs('public/filesAttached/', $file, $fileName);
+                $fileString = $fileString.$fileName.'#';
+            }
+        }
+
+        $data = $request->validate([
+            'commenttext' => ['nullable']
+        ]);
+
+        $commentData['user_id'] = auth()->user()->id;
+        $commentData['ticket_id'] = $ticket->id;
+        $commentData['commemttext'] = $request->commenttext;
+        $commentData['filesattached'] = $fileString;
+
+        Comment::create($commentData);
+
+        return redirect()->route('ticket.show', $ticket->id )->with('success','Comment added');
     }
 
     /**

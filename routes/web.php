@@ -6,6 +6,7 @@ use App\Http\Controllers\DeptController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\SubcategoryController;
@@ -103,6 +104,8 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
         Route::get('/changecategories/{ticket}',[TicketController::class, 'changecategories'])->name('ticket.changecategories');
         Route::post('/changecategories/{ticket}',[TicketController::class, 'changecategoriespost'])->name('ticket.changecategoriespost');
         Route::post('/changestatuspriority/{ticket}',[TicketController::class, 'changestatuspriority'])->name('ticket.changestatuspriority');
+
+        Route::post('/comment/{ticket}', [CommentController::class, 'store'])->name('commentpost');
     });
 });
 
