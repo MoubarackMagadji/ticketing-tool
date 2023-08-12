@@ -106,6 +106,8 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
         Route::post('/changestatuspriority/{ticket}',[TicketController::class, 'changestatuspriority'])->name('ticket.changestatuspriority');
 
         Route::post('/comment/{ticket}', [CommentController::class, 'store'])->name('commentpost');
+
+        Route::get('/usersonticket/{ticket}', [TicketController::class, 'usersonticketview'])->name('usersonticketview');
     });
 });
 
