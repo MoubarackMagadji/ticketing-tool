@@ -156,7 +156,7 @@
                     <div class='bg-white p-2 mb-2'>
                         <div class='d-flex justify-content-between fw-bold' style="border-bottom:1px dashed black">
                             <span>{{ $comment->user->name }}</span>
-                            <span>{{ $comment->created_at->format('d-m-y h:i:s') }} </span>
+                            <span>{{ $comment->created_at->format('d-m-y H:i:s') }} </span>
                         </div>
                         <div>
                             {{ $comment->commemttext }}  
