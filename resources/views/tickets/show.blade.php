@@ -74,7 +74,12 @@
 
             <div>
                 <span class='d-block '>Employee currently on the ticket</span>
-                <span class='d-block fw-bold'>No employee yet</span>
+                <span class='d-block fw-bold'>
+                    No employee yet 
+                    <a href="{{ route('usersonticketview', $ticket->id)}}"> <button class=" btn btn-primary btn-sm">Add employee</button> </a>
+                
+                </span> 
+                
             </div>
 
             <div>

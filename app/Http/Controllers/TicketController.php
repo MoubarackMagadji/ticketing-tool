@@ -168,6 +168,12 @@ class TicketController extends Controller
         return redirect()->route('ticket.show', $ticket->id )->with('success','Changed successfully made');
 
     }
+
+    public function usersonticketview(Ticket $ticket){
+
+        return view('tickets.usersonticketview', compact('ticket'));
+
+    }
     /**
      * Remove the specified resource from storage.
      *
