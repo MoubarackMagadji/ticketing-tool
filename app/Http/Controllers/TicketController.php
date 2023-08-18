@@ -11,6 +11,7 @@ use App\Models\Priority;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateTicketRequest;
 
@@ -174,6 +175,56 @@ class TicketController extends Controller
         return view('tickets.usersonticketview', compact('ticket'));
 
     }
+
+    public function usersonticketviewadd(Ticket $ticket, Request $request){
+        // dd($ticket->toArray());
+
+        $ticket->usersonit()->Attach($request->assignees);
+
+        return redirect()->back()->with('success','Users assigned');
+    }
+
+    public function usersonticketviewmakemain(Request $request, Ticket $ticket){
+        
+        DB::table('staffs_on_ticket')->whereticket_id($ticket->id)->whereismain(true)
+            ->update([
+                'ismain' => false,
+                'updated_at' =>now()
+            ]);
+        
+
+        DB::table('staffs_on_ticket')->whereticket_id($ticket->id)->whereuser_id($request->user_id)
+            ->update([
+                'ismain' => true,
+                'updated_at' =>now()
+            ]);
+        
+
+        return redirect()->back()->with('success','Main user edited');
+    }
+
+    public function usersonticketviewdeactivate(Ticket $ticket, Request $request){
+        DB::table('staffs_on_ticket')->whereticket_id($ticket->id)->whereuser_id($request->user_id)
+            ->update([
+                'status' => false,
+                'updated_at' =>now()
+            ]);
+          
+            return redirect()->back()->with('success','user deactivated');
+    }
+
+    public function usersonticketviewactivate(Ticket $ticket, Request $request){
+        DB::table('staffs_on_ticket')->whereticket_id($ticket->id)->whereuser_id($request->user_id)
+            ->update([
+                'status' => true,
+                'updated_at' =>now()
+            ]);
+          
+            return redirect()->back()->with('success','user activated');
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *

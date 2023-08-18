@@ -73,12 +73,29 @@
             </div>
 
             <div>
-                <span class='d-block '>Employee currently on the ticket</span>
+                <span class='d-block '>Main employee ticket</span>
                 <span class='d-block fw-bold'>
-                    No employee yet 
-                    <a href="{{ route('usersonticketview', $ticket->id)}}"> <button class=" btn btn-primary btn-sm">Add employee</button> </a>
+                    @if ($ticket->mainuser->count())
+                        {{ $ticket->mainuser[0]->name }} 
+                        <a href="{{ route('usersonticketview', $ticket->id)}}"> 
+                            <button class=" btn btn-primary btn-sm">Change employees</button>
+                        </a>
+                    @else
+                        No employee
+                        <a href="{{ route('usersonticketview', $ticket->id)}}"> 
+                            <button class=" btn btn-primary btn-sm">Add employee</button>
+                        </a>
+
+                        
+                    @endif
+                    
+                    {{-- No employee yet{{  }}  --}}
+                      
                 
                 </span> 
+                @if ($ticket->usersonit->count())
+                    Total nb of staffs on assigned: <span class='fw-bold'>{{ $ticket->usersonit->count() }}</span>
+                @endif
                 
             </div>
 

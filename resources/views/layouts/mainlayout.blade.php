@@ -15,7 +15,7 @@
 <body>
     <header>
         <div id='head'>
-            <span><i id='shrink' style='font-size: 23px;margin-right:10px;' class='fa fa-bars'></i><a id='hIndex' href='dashboard.php'>Ticketing Tool - Employee </a></span> 
+            <span><i id='shrink' style='font-size: 23px;margin-right:10px;' class='fa fa-bars'></i><a id='hIndex' href='{{ route('dashboard')}}'>Ticketing Tool - Employee </a></span> 
                 <div>
                     <span id='a'></span>:
                     <span id='b'></span>:
@@ -38,7 +38,7 @@
             <a href='profile.php'><i class='fa fa-user-circle'></i><span>  Profile</span></a> --}}
             
 
-            <a href='dashboard.php'><i class='fa fa-home'></i><span> Dashboard</span></a>
+            <a href='{{ route('dashboard')}}'><i class='fa fa-home'></i><span> Dashboard</span></a>
             <a href='{{ route('tickets')}}'><i class='fa fa-ticket'></i> Tickets</span></a>
             <a href='{{ route('users')}}'><i class='fa fa-ticket'></i> Users</span></a>
             <a href='{{ route('depts')}}'><i class='fa fa-ticket'></i> Depts</span></a>
@@ -47,7 +47,7 @@
             <a href='{{ route('categories')}}'><i class='fa fa-ticket'></i> Categories</span></a>
             <a href='{{ route('subcategories')}}'><i class='fa fa-ticket'></i> Subcategories</span></a>
 
-            <form method="post" action='/staffs/logout'>
+            <form method="post" action='{{ route('logout')}}'>
                 @csrf
                 <input type="submit" class='btn btn-danger text-start w-100'  value='Logout'>
             </form>

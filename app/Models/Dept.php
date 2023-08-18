@@ -29,4 +29,8 @@ class Dept extends Model
     public function intickets(){
         return $this->belongsTo(Tickets::class, 'dept_id', 'id');
     }
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
 }

@@ -107,7 +107,18 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
 
         Route::post('/comment/{ticket}', [CommentController::class, 'store'])->name('commentpost');
 
-        Route::get('/usersonticket/{ticket}', [TicketController::class, 'usersonticketview'])->name('usersonticketview');
+        Route::prefix('usersonticket')->group(function(){
+            Route::get('/{ticket}', [TicketController::class, 'usersonticketview'])->name('usersonticketview');
+            Route::post('/{ticket}', [TicketController::class, 'usersonticketviewadd'])->name('usersonticketviewadd');
+
+            Route::post('/usersonticket/{ticket}/makemain/', [TicketController::class, 'usersonticketviewmakemain'])->name('usersonticketviewmakemain');
+            Route::post('/usersonticket/{ticket}/deactivate/', [TicketController::class, 'usersonticketviewdeactivate'])->name('usersonticketviewdeactivate');
+            Route::post('/usersonticket/{ticket}/activate/', [TicketController::class, 'usersonticketviewactivate'])->name('usersonticketviewactivate');
+        });
+        
+        
+        
+    
     });
 });
 

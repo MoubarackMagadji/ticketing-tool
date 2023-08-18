@@ -53,5 +53,24 @@ class User extends Authenticatable
         return $this->belongsTo(Comment::class);
     }
 
+    public function users(){
+        return $this->belongsTo(Dept::class);
+    }
+
+    public function linkstotickets(){
+        return $this->belongsToMany(Ticket::class, 'staffs_on_ticket')->withTimestamps()->withPivot('ismain','status');;
+    }
+
+    
+    // public function ismainonticket(){
+    //     return $this->linkstotickets()/* ->where('staffs_on_ticket.user_id',$this->id) */;
+    //     // ->whereismain(true);
+        
+    // }
+
+    // public function isactiveonticket(){
+    //     return $this->linkstotickets()/* ->where('staffs_on_ticket.user_id',$this->id) */; 
+    //     // ->where('status',false)   
+    // }
     
 }

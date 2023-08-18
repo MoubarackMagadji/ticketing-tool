@@ -56,6 +56,16 @@ class Ticket extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function usersonit(){
+        return $this->belongsToMany(User::class, 'staffs_on_ticket' )->withTimestamps()->withPivot('ismain','status');
+    }
+    
+    public function mainuser(){
+        return $this->usersonit()->where('ismain',true);
+    }
+
+    
+
 
 
 
