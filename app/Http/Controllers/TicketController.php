@@ -210,7 +210,8 @@ class TicketController extends Controller
                 'updated_at' =>now()
             ]);
           
-            return redirect()->back()->with('success','user deactivated');
+            toastr()->success('user deactivated');
+            return redirect()->back()/* ->with('success','user deactivated') */;
     }
 
     public function usersonticketviewactivate(Ticket $ticket, Request $request){
@@ -220,7 +221,8 @@ class TicketController extends Controller
                 'updated_at' =>now()
             ]);
           
-            return redirect()->back()->with('success','user activated');
+            toastr()->success('user activated');
+            return redirect()->back()/* ->with('success','user activated') */;
     }
 
 

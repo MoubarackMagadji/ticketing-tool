@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <a href=' {{ url()->previous() }}'><button class='btn btn-light btn-sm px-4'>Back</button></a>
+    <a href=' {{ route('ticket.show', $ticket->id ) }}'><button class='btn btn-light btn-sm px-4'>Back</button></a>
     
     <div class="bg-white p-2 mt-2">
         {{ $ticket->id }}
@@ -58,7 +58,7 @@
                             <form action='{{ route('usersonticketviewactivate', $ticket->id) }}' method='post' class='ms-2'>
                                 @csrf
                                 <input type='hidden' name='user_id' value="{{ $user->id }}">
-                                <button class='btn btn-sm btn-info'> Active</button>
+                                <button class='btn btn-sm btn-info'> Activate</button>
                             </form>
                         @endif
                     </div>
