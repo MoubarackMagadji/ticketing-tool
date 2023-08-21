@@ -27,7 +27,7 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => 'required',
             'username' => ['required', Rule::unique('users', 'username')],
-            'email' => ['required', 'email', Rule::unique('users','email')],
+            // 'email' => ['required', 'email', Rule::unique('users','email')],
             'staffID' => ['required', Rule::unique('users', 'staffID') ],
             'dept_id' => ['required', Rule::exists('depts', 'id')],
             'level' => 'required|integer|min:1|max:5',
