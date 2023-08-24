@@ -66,11 +66,35 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
 
-        return view('users.index', compact('users'));
+        // dd($request->all());
+
+        // print_r();
+
+        // $users = $request->all();
+        $depts = Dept::all()->where('d_active',1);
+
+        
+        $users = User::query();
+
+        if($request->staffId){
+            $users = $users->where('staffID', $request->staffId);
+        }
+        if($request->dept_id){
+            $users = $users->where('dept_id', $request->dept_id);
+        }
+        if($request->status_id != '' ){
+            $users = $users->where('status', $request->status_id);
+        }
+        
+
+        
+
+        $users = $users->get();
+       
+        return view('users.index', compact('users', 'request','depts'));
     }
 
     /**

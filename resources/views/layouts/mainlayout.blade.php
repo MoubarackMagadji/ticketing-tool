@@ -3,6 +3,8 @@
 <head>
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<link rel="stylesheet" href=" {{ asset('css/bootstrap-5.3.1.css')}}"> 
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
+    <link id="bs-css" href="{{ asset('css/jqD.css') }}" rel="stylesheet">
     @yield('css')
     @yield('csscode')
 	<meta charset='utf-8'>
@@ -79,6 +81,7 @@
 <?php /* include('footer.php'); */ ?>
 	<script src='{{ asset('js/jq.js') }}'></script>
     <script src=' {{ asset('js/bootstrap-5.3.1.js') }}'> </script>
+    <script src=" {{ asset('js/jqD.js') }}"></script>
     @yield('js')
     @yield('script')
 	<script>

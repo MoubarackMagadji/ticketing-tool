@@ -35,6 +35,7 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::post('/users', [UserController::class, 'index'])->name('users');
     
     Route::prefix('user')->group(function(){
         Route::get('/create', [UserController::class, 'create'])->name('user.create');

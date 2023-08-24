@@ -377,7 +377,7 @@ select{
 	display:inline-block;
 	margin:0px 0px;
 	padding: 5px 5px 7px;
-	width:200px;
+	/* width:200px; */
 	border:1px solid black;
 	 background-image: url(../images/select.png);
     background-repeat: no-repeat;
