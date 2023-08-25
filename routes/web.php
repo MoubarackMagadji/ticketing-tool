@@ -93,6 +93,7 @@ Route::prefix('staffs')->middleware('auth')->group(function(){
     });
 
     Route::get('/tickets', [TicketController::class,'index'])->name('tickets');
+    Route::post('/tickets', [TicketController::class,'index'])->name('tickets');
 
     Route::prefix('ticket')->group(function(){
         Route::get('/show/{ticket}', [TicketController::class, 'show'])->name('ticket.show');

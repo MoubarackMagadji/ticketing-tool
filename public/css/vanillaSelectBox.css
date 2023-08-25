@@ -256,8 +256,8 @@ li.short{
 	display: inline-block;
 	transform: rotate(45deg);
 	margin-top:1px;
-	height: 8px;
-	width:  5px;
+	height: 10px;
+	width:  8px;
 	border-bottom: 3px solid black;
 	border-right:  3px solid black;
 }

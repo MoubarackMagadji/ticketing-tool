@@ -187,7 +187,20 @@
 @section('script')
     <script>
         $(document).ready(()=>{
-            // $('.form-select').selectpicker();
+            
+            console.log('ok')
+
+            $.ajax({
+                url:"{{route('home')}}",
+                type:'post',
+                data:'ok',
+                dataType:'json',
+                success: function(donne,statut){
+                   console.log('ok')
+                }
+                    
+            })
+            
         })
     </script>
 @endsection

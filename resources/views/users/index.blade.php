@@ -10,7 +10,7 @@
 
 @section('content')
 
-    <a class='mb-5 d-inline-block' href=' {{ route('user.create') }}'><button>Create a user</button></a>
+    <a class='mb-5 d-inline-block' href=' {{ route('user.create') }}'><button class='btn btn-primary btn-sm'>Create a user</button></a>
 
     <div>
         <form action=" {{ route('users') }}" method="post" class='d-flex mb-5 flex-wrap'>

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Status;
+use App\Models\Priority;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ticket extends Model
 {
@@ -56,12 +58,20 @@ class Ticket extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function status(){
+        return $this->belongsTo(Status::class);
+    }
+
+    public function priority(){
+        return $this->belongsTo(Priority::class);
+    }
+
     public function usersonit(){
         return $this->belongsToMany(User::class, 'staffs_on_ticket' )->withTimestamps()->withPivot('ismain','status');
     }
     
-    public function mainuser(){
-        return $this->usersonit()->where('ismain',true);
+    public function getMainuserAttribute(){
+        return $this->usersonit()->where('ismain',true)->first();
     }
 
     

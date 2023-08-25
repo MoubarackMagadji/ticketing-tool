@@ -12,6 +12,7 @@ use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateTicketRequest;
 
@@ -22,10 +23,73 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = Ticket::all();
-        return view ('tickets.index', compact('tickets'));
+        // dd($request->all());
+
+        $authuserlevel = auth()->user()->level;
+        $tickets = Ticket::where(function($q) use($authuserlevel){
+            $q->where('dept_id', auth()->user()->dept_id);
+        });
+            
+                        
+        // $tickets = Ticket::all();
+        
+        if($request->id){
+            $tickets = $tickets->where('id',$request->id);
+        }
+        if($request->title){
+
+            $tickets = $tickets->where('title', 'like', "%$request->title%");
+        }
+        if($request->status){
+            
+            $tickets = $tickets->wherein('status_id', $request->status);
+            Session::flash('status', $request->status);
+        }
+
+        if($request->priorities){
+            
+            $tickets = $tickets->wherein('priority_id', $request->priorities);
+            Session::flash('priorities', $request->priorities);
+        }
+
+        if($request->user){
+            
+            $postuser = $request->user;
+            $tickets  = $tickets->wherehas('usersonit', function($q) use($postuser){
+                $q->where('name', 'like', "%$postuser%");
+            });
+        }
+
+        if($request->startTime){
+            // dd($request->startTime);
+            $tickets = $tickets->where('created_at', '>=',$request->startTime);
+        }
+
+        if($request->endTime){
+            $tickets = $tickets->where('created_at', '<=',$request->endTime);
+        }
+
+       
+        
+
+        $tickets = $tickets->get();
+
+        $statuss = Status::where('status',true)->get();
+        $priorities = Priority::where('status',true)->get();
+        $deptUsers = User::where('dept_id', auth()->user()->dept_id)->get();
+
+        return view ('tickets.index', 
+                        compact(
+                            'tickets', 
+                            'request', 
+                            'request', 
+                            'statuss', 
+                            'priorities',
+                            'deptUsers'
+                        )
+                    );
     }
 
     /**

@@ -10,7 +10,7 @@
 
 @section('content')
 <div class='' >  
-    <h1 class="display-6"> Ticket No: {{ $ticket->id }} - <span>{{ $ticket->title }} </span> </h1>
+    <h1 class="display-6"> <a href=' {{ route('tickets') }}'><button class='btn btn-light btn-sm px-4'>All tickets</button></a> Ticket No: {{ $ticket->id }} - <span>{{ $ticket->title }} </span> </h1>
 
     <div class='ms-2 row gap-2'>
 
@@ -25,7 +25,7 @@
                     <div class='col mb-3'>
                         {{-- <label class='form-label' for="">Priority </label> --}}
             
-                        <select class='form-select' name='priority_id' >
+                        <select class='form-control form-control-sm' name='priority_id' >
                             <option value=''>Choose a priority</option>
             
                             @foreach ($priorities as $priority)
@@ -43,7 +43,7 @@
                     <div class='col mb-3'>
                         {{-- <label class='form-label' for="">Status </label> --}}
             
-                        <select class='form-select' name='status_id' >
+                        <select class='form-control form-control-sm' name='status_id' >
                             <option value=''>Choose a status</option>
             
                             @foreach ($statuss as $status)
@@ -60,9 +60,9 @@
                         @endError
             
                     </div>
-                    <div class='col-1 justify-self-bottom'>
-                        <button class='btn btn-secondary'>OK</button>
-                    </div>
+                    {{-- <div class='col-1 justify-self-bottom'>
+                        <button class='btn btn-secondary btn-sm'>OK</button>
+                    </div> --}}
                 </form>
                 
             </div>
@@ -75,8 +75,9 @@
             <div>
                 <span class='d-block '>Main employee ticket</span>
                 <span class='d-block fw-bold'>
-                    @if ($ticket->mainuser->count())
-                        {{ $ticket->mainuser[0]->name }} 
+
+                    @if ($ticket->mainuser)
+                        {{ $ticket->mainuser->name }} 
                         <a href="{{ route('usersonticketview', $ticket->id)}}"> 
                             <button class=" btn btn-primary btn-sm">Change employees</button>
                         </a>
