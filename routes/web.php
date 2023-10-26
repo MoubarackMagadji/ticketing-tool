@@ -2,6 +2,7 @@
 
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatusController;
@@ -25,6 +26,9 @@ use App\Http\Controllers\SubcategoryController;
 Route::get('/', function () {
     return view('index');
 })->middleware('guest')->name('home');
+
+
+Route::post('/loadsubcategories', [AjaxController::class , 'loadsubcategories'])->middleware('auth')->name('loadsubcategories');
 
 Route::post('/loginValidate', [UserController::class, 'authenticate'])->name('authenticate')->middleware('guest');
 

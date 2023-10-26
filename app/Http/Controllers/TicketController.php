@@ -71,9 +71,6 @@ class TicketController extends Controller
             $tickets = $tickets->where('created_at', '<=',$request->endTime);
         }
 
-       
-        
-
         $tickets = $tickets->get();
 
         $statuss = Status::where('status',true)->get();
@@ -91,6 +88,8 @@ class TicketController extends Controller
                         )
                     );
     }
+
+    
 
     /**
      * Show the form for creating a new resource.

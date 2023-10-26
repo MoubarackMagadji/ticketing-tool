@@ -144,26 +144,9 @@
                 minWidth: -1,
             });
 
-            let usersmySelect = new vanillaSelectBox("#users",{
-                disableSelectAll: false,
-                maxWidth: 200,
-                minWidth: -1,
-            });
+            
 
-            $.ajax({
-                    url:'postfolder/loading.php',
-                    type:'post',
-                    data:'departementClickLoading=ok&value='+value,
-                    dataType:'json',
-                    success: function(donne,statut){
-                        valueDiv.empty()
-                        donne.forEach(function(dt){
-                        $('input[name=t_s_empCode]').siblings('.value')
-                        .append($('<span>').attr('data-mvalue',dt['s_empCode']).text(dt['s_fullname']) )
-                    })
-                        lHide()           
-                    }
-            })
+           
             
              
 

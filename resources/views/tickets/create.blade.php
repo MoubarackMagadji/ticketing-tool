@@ -188,18 +188,23 @@
     <script>
         $(document).ready(()=>{
             
-            console.log('ok')
-
+            /* console.log('ok')
+            let data = {
+                "_token": "{{ csrf_token() }}",
+                'tic':'touctouc'
+            }
+            
+            
             $.ajax({
-                url:"{{route('home')}}",
-                type:'post',
-                data:'ok',
-                dataType:'json',
-                success: function(donne,statut){
-                   console.log('ok')
+                url:" {{ route('loadsubcategories') }}",
+                method:'post',
+                data:data,
+                dataType:'text',
+                success: function(donne){
+                   console.log(donne)
                 }
                     
-            })
+            }) */
             
         })
     </script>
